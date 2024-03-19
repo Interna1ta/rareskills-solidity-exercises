@@ -2,6 +2,11 @@
 pragma solidity ^0.8.13;
 
 contract Tupledore {
+   struct UserInfo {
+        address userAddress;
+        uint256 userId;
+    }
+    UserInfo public userInfo;
     /* This exercise assumes you know about tuples/struct in solidity.
         1. Create a struct named `UserInfo` with types address 
            and uint256.
@@ -12,4 +17,12 @@ contract Tupledore {
         4. Create a function called `returnTuple`, 
            that returns `userInfo` (as a tuple)
     */
+
+    function setTuple(address _userAddres, uint256 _userId) public {
+      userInfo = UserInfo(_userAddres, _userId);
+    }
+
+    function returnTuple() public view returns (address, uint256)  {
+     return (userInfo.userAddress, userInfo.userId);
+    }
 }
