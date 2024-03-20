@@ -10,8 +10,15 @@ contract BlockNumber {
      */
 
     address public lastCaller;
+    mapping(uint256 => bool) blockToHasBeenCalled;
 
     function callMe() external {
         /// your code here
+        require(
+            !blockToHasBeenCalled[block.number],
+            "BlockNumber: cannot call more than once per block"
+        );
+        blockToHasBeenCalled[block.number] = true;
+        lastCaller = msg.sender;
     }
 }
